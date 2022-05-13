@@ -46,7 +46,8 @@
           ["parent", "sibling", "index"],
           ["/^./styles/"]
         ],
-        "alphabetize": { "order": "asc", "ignoreCase": true }
+        "alphabetize": { "order": "asc", "ignoreCase": true },
+        "react/jsx-props-no-spreading": "off"
       }
     ]
   },
