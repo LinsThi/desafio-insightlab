@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "desafio-insightlab",
+    "slug": "desafio-insightlab",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
