@@ -1,7 +1,7 @@
 import React from 'react';
 
 import * as Sty from './styles';
-import { Form } from '~/shared/components/Form';
+import { Form } from '~/modules/Login/components/Form';
 
 export function LoginScreen() {
   return (

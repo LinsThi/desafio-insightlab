@@ -81,14 +81,14 @@ export function Form() {
           text="Entrar"
           color="#1B2735"
           textColor="#FFFFFF"
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.navigate('Home' as never)}
         />
 
         <Button
           text="Cadastrar"
           color="#fff"
           textColor="#1B2735"
-          onPress={() => navigation.navigate('Register')}
+          onPress={() => navigation.navigate('Register' as never)}
         />
       </Sty.ContainerButtons>
     </Sty.Container>
