@@ -10,7 +10,7 @@ type NameButtonProps = {
 };
 
 export const Container = styled(TouchableOpacity)<ContainerProps>`
-  width: 100%;
+  width: 226px;
   background: ${({ color }) => color};
   margin-top: 20px;
   justify-content: center;
