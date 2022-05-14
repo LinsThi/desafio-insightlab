@@ -4,6 +4,7 @@ import vacinne from '~/shared/assets/vaccine.png';
 export const Container = styled.View`
   flex: 1;
   align-items: center;
+  justify-content: center;
 `;
 
 export const ContainerItem = styled.View`
@@ -17,7 +18,9 @@ export const ContainerItem = styled.View`
   border-radius: 20px;
 `;
 
-export const ContainerInfoCitizen = styled.View``;
+export const ContainerInfoCitizen = styled.View`
+  flex: 1;
+`;
 
 export const ContainerVacinne = styled.View``;
 
