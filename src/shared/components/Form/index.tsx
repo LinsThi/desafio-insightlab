@@ -81,7 +81,7 @@ export function Form() {
           text="Entrar"
           color="#1B2735"
           textColor="#FFFFFF"
-          onPress={handleSubmit(handleUserSubmit)}
+          onPress={() => navigation.navigate('Home')}
         />
 
         <Button
