@@ -7,8 +7,16 @@ import loginImage from '~/shared/assets/loginImage.png';
 import { Button } from '~/shared/components/Button';
 import { ControlledInput } from '~/shared/components/ControlledInput';
 
+import Toast from 'react-native-toast-message';
+
 import * as Sty from './styles';
 import { useNavigation } from '@react-navigation/native';
+import api from '~/shared/services/api';
+
+import { LOGIN } from '~/shared/constants/api';
+import { useDispatch } from 'react-redux';
+import { userLoginAction } from '~/shared/store/ducks/user/actions';
+import { ToastNotification } from '~/shared/components/ToastNotification';
 
 type FormData = {
   email: string;
@@ -38,10 +46,28 @@ export function Form() {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const handleUserSubmit = useCallback((data: FormData) => {
-    console.log(data);
-    // navigation.navigate('Home' as never);
+    api
+      .post(LOGIN, {
+        email: data.email,
+        password: data.password,
+      })
+      .then(response => {
+        const { user, token } = response.data;
+
+        dispatch(userLoginAction(user.name, token));
+      })
+      .catch(error => {
+        ToastNotification({
+          type: 'error',
+          title: 'Ops, ocorreu um erro:',
+          info: error.response.data.message,
+        });
+
+        console.log(error);
+      });
   }, []);
 
   return (
@@ -92,6 +118,8 @@ export function Form() {
           onPress={() => navigation.navigate('Register' as never)}
         />
       </Sty.ContainerButtons>
+
+      <Toast />
     </Sty.Container>
   );
 }

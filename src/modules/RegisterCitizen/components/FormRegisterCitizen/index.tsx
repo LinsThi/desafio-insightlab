@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-
+import Toast from 'react-native-toast-message';
 import { Button } from '~/shared/components/Button';
 import { ControlledInput } from '~/shared/components/ControlledInput';
 
@@ -10,13 +10,18 @@ import * as Sty from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { ControlledPicker } from '../ControlledPicker';
 import { VaccinesProps } from '../PickerInput/mock';
+import api from '~/shared/services/api';
+import { REGISTER_VACCINATED_CITIZENS } from '~/shared/constants/api';
+import { ToastNotification } from '~/shared/components/ToastNotification';
+import { AplciationState } from '~/shared/@types/Entity/AplicationState';
+import { useSelector } from 'react-redux';
 
 type FormData = {
   name: string;
   cpf: string;
-  birthDay: string;
+  birthDay: Date;
   vacinne: VaccinesProps;
-  dose: number;
+  dose: string;
 };
 
 const schema = yup.object({
@@ -43,9 +48,31 @@ export function FormRegisterCitizen() {
   });
 
   const navigation = useNavigation();
+  const { token } = useSelector((state: AplciationState) => state.user);
 
   const handleUserSubmit = useCallback((data: FormData) => {
-    navigation.navigate('Home' as never);
+    api
+      .post(
+        REGISTER_VACCINATED_CITIZENS,
+        {
+          name: data.name,
+          cpf: data.cpf,
+          birthDate: new Date(data.birthDay),
+          vaccineName: data.vacinne,
+          vaccineDose: data.dose,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      )
+      .then(() => {
+        ToastNotification({
+          type: 'success',
+          title: 'Sucesso',
+          info: 'Cidadão vacinado cadastrado',
+          navigate: () => navigation.navigate('Home' as never),
+        });
+      });
   }, []);
 
   return (
@@ -110,6 +137,8 @@ export function FormRegisterCitizen() {
           />
         </Sty.ContainerButtons>
       </Sty.ContainerForm>
+
+      <Toast />
     </Sty.Container>
   );
 }
