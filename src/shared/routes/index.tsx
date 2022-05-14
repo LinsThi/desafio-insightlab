@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { HomeScreen } from '~/modules/Home/Views/HomeScreen';
 import { LoginScreen } from '~/modules/Login/Views/LoginScreen';
 import { RegisterScreen } from '~/modules/Register/Views/RegisterScreen';
 
@@ -23,6 +24,7 @@ export function StackRoutes() {
           >
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen name="Home" component={HomeScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
