@@ -1,5 +1,5 @@
 import React from 'react';
-import { Control, Controller, FieldError } from 'react-hook-form';
+import { Control, Controller } from 'react-hook-form';
 import { PickerInput, PickerInputProps } from '../PickerInput';
 
 import * as Sty from './styles';
