@@ -3,8 +3,8 @@ import styled from 'styled-components/native';
 import Icon from '../Icon';
 
 type IconProps = {
-  name: string;
-  type: string;
+  name?: string;
+  type?: string;
 };
 
 type ContainerInputProps = {
@@ -41,4 +41,5 @@ export const ButtonIcon = styled.TouchableOpacity``;
 export const LabelInput = styled.Text`
   margin-bottom: 10px;
   font-size: 17px;
+  font-weight: bold;
 `;

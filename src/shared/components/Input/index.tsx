@@ -6,8 +6,8 @@ import * as Sty from './styles';
 export type InputProps = {
   label: string;
   border?: boolean;
-  iconLeftName: string;
-  iconLeftType: string;
+  iconLeftName?: string;
+  iconLeftType?: string;
   iconLeftAction?: () => void;
 } & TextInputProps;
 
@@ -23,7 +23,12 @@ export function Input({
     <Sty.Container>
       <Sty.LabelInput>{label}</Sty.LabelInput>
 
-      <Sty.ContainerInput border={border}>
+      <Sty.ContainerInput
+        border={border}
+        style={{
+          elevation: 5,
+        }}
+      >
         <Sty.Input {...rest} />
 
         <Sty.ButtonIcon onPress={iconLeftAction}>
