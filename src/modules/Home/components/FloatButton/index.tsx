@@ -7,7 +7,9 @@ export function FloatButton() {
   const navigation = useNavigation();
 
   return (
-    <Sty.Container onPress={() => navigation.navigate('RegisterCitizen')}>
+    <Sty.Container
+      onPress={() => navigation.navigate('RegisterCitizen' as never)}
+    >
       <Sty.IconButton name="plus" type="antDesign" />
     </Sty.Container>
   );
