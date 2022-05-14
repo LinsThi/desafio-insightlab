@@ -41,6 +41,7 @@ export function Form() {
 
   const handleUserSubmit = useCallback((data: FormData) => {
     console.log(data);
+    // navigation.navigate('Home' as never);
   }, []);
 
   return (
@@ -81,7 +82,7 @@ export function Form() {
           text="Entrar"
           color="#1B2735"
           textColor="#FFFFFF"
-          onPress={() => navigation.navigate('Home' as never)}
+          onPress={handleSubmit(handleUserSubmit)}
         />
 
         <Button
