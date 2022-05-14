@@ -3,19 +3,19 @@ import { Control, Controller, FieldError } from 'react-hook-form';
 import { Input, InputProps } from '../Input';
 
 import * as Sty from './styles';
-import { maskBirthDay, maskCPF } from './utils';
+import { verifyMask } from './utils';
 
 type ControlledProps = InputProps & {
   control: Control<any>;
   name: string;
-  mask?: 'CPF' | 'birthDay';
+  mask?: 'CPF' | 'birthDay' | '';
   error?: FieldError;
 };
 
 export function ControlledInput({
   control,
   name,
-  mask,
+  mask = '',
   error,
   ...rest
 }: ControlledProps) {
@@ -26,15 +26,7 @@ export function ControlledInput({
         control={control}
         render={({ field: { onChange, value } }) => (
           <Input
-            onChangeText={text => {
-              if (mask === 'CPF') {
-                onChange(maskCPF(text));
-              } else if (mask === 'birthDay') {
-                onChange(maskBirthDay(text));
-              } else {
-                onChange(text);
-              }
-            }}
+            onChangeText={text => onChange(verifyMask(text, mask))}
             value={value}
             {...rest}
           />
