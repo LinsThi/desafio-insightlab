@@ -1,0 +1,51 @@
+export const vaccinesArray = [
+  {
+    id: 0,
+    name: 'Cidadão 1',
+    cpf: '000-000-000-00',
+    birthDay: '00/00/00',
+    dose: '1',
+  },
+  {
+    id: 1,
+    name: 'Cidadão 2',
+    cpf: '000-000-000-00',
+    birthDay: '00/00/00',
+    dose: '1',
+  },
+  {
+    id: 2,
+    name: 'Cidadão 3',
+    cpf: '000-000-000-00',
+    birthDay: '00/00/00',
+    dose: '1',
+  },
+  {
+    id: 3,
+    name: 'Cidadão 4',
+    cpf: '000-000-000-00',
+    birthDay: '00/00/00',
+    dose: '1',
+  },
+  {
+    id: 4,
+    name: 'Cidadão 5',
+    cpf: '000-000-000-00',
+    birthDay: '00/00/00',
+    dose: '1',
+  },
+  {
+    id: 5,
+    name: 'Cidadão 6',
+    cpf: '000-000-000-00',
+    birthDay: '00/00/00',
+    dose: '1',
+  },
+  {
+    id: 6,
+    name: 'Cidadão 7',
+    cpf: '000-000-000-00',
+    birthDay: '00/00/00',
+    dose: '1',
+  },
+];
