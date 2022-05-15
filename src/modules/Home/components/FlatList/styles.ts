@@ -54,6 +54,11 @@ export const InformationCitizenDose = styled.Text`
   margin-top: 5px;
 `;
 
+export const ActivityIndicatorLoading = styled.ActivityIndicator.attrs({
+  size: 'large',
+  color: '#dffe3a',
+})``;
+
 export const FlatList = styled.FlatList`
   width: 90%;
 `;
