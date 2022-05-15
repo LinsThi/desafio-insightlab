@@ -1,10 +1,10 @@
 import { ImageBackground } from 'react-native';
 import styled from 'styled-components/native';
 
-import loginBackground from '~/shared/assets/loginBackground.png';
+import registerBackground from '~/shared/assets/registerBackground.png';
 
 export const Container = styled(ImageBackground).attrs({
-  source: loginBackground,
+  source: registerBackground,
 })`
   flex: 1;
   align-items: center;
