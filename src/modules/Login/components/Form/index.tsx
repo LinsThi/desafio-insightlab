@@ -34,11 +34,13 @@ export function Form() {
   });
 
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const handleUserSubmit = useCallback((data: FormData) => {
+    setLoading(true);
     api
       .post(LOGIN, {
         email: data.email,
@@ -55,6 +57,9 @@ export function Form() {
           title: 'Ops, ocorreu um erro:',
           info: error.response.data.message,
         });
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -97,6 +102,7 @@ export function Form() {
           color="#1B2735"
           textColor="#FFFFFF"
           onPress={handleSubmit(handleUserSubmit)}
+          loading={loading}
         />
 
         <Button
