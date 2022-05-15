@@ -55,8 +55,6 @@ export function Form() {
           title: 'Ops, ocorreu um erro:',
           info: error.response.data.message,
         });
-
-        console.log(error);
       });
   }, []);
 
