@@ -4,6 +4,7 @@ import vacinne from '~/shared/assets/vaccine.png';
 export const Container = styled.View`
   flex: 1;
   align-items: center;
+  justify-content: center;
 `;
 
 export const ContainerItem = styled.View`
@@ -17,7 +18,9 @@ export const ContainerItem = styled.View`
   border-radius: 20px;
 `;
 
-export const ContainerInfoCitizen = styled.View``;
+export const ContainerInfoCitizen = styled.View`
+  flex: 1;
+`;
 
 export const ContainerVacinne = styled.View``;
 
@@ -51,6 +54,12 @@ export const InformationCitizenDose = styled.Text`
   margin-top: 5px;
 `;
 
+export const ActivityIndicatorLoading = styled.ActivityIndicator.attrs({
+  size: 'large',
+  color: '#dffe3a',
+})``;
+
 export const FlatList = styled.FlatList`
   width: 90%;
+  margin-top: 10px;
 `;

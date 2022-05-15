@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormRegister } from '~/shared/components/FormRegister';
+import { FormRegister } from '~/modules/Register/components/FormRegister';
 
 import * as Sty from './styles';
 

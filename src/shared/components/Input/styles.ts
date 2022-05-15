@@ -39,7 +39,7 @@ export const IconInput = styled(Icon).attrs<IconProps>(({ name, type }) => ({
 export const ButtonIcon = styled.TouchableOpacity``;
 
 export const LabelInput = styled.Text`
-  margin-bottom: 10px;
+  margin: 15px 0px 5px 7px;
   font-size: 17px;
   font-weight: bold;
 `;

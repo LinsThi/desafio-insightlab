@@ -1,3 +1,4 @@
+import { Popable } from 'react-native-popable';
 import styled from 'styled-components/native';
 import Icon from '~/shared/components/Icon';
 
@@ -18,7 +19,11 @@ export const ContainerUser = styled.View`
   align-items: center;
 `;
 
-export const ContainerPopable = styled.View`
+export const ContainerButtons = styled.View`
+  flex-direction: row;
+`;
+
+export const ContainerPopable = styled.TouchableOpacity`
   padding: 5px 0px;
   width: 50px;
   justify-content: center;
@@ -34,13 +39,23 @@ export const TextUser = styled.Text`
   color: #fff;
 
   margin-left: 10px;
+  font-weight: bold;
+`;
+
+export const ButtonFilter = styled.TouchableOpacity`
+  margin-right: 20px;
 `;
 
 export const Button = styled.TouchableOpacity``;
 
+export const PopableView = styled(Popable).attrs({ position: 'bottom' })`
+  top: 0px;
+  width: 50px;
+`;
+
 export const IconHeader = styled(Icon).attrs<IconProps>(({ name, type }) => ({
   name,
   type,
-  size: 40,
+  size: 30,
   color: '#fff',
 }))``;

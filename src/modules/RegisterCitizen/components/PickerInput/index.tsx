@@ -21,7 +21,7 @@ export function PickerInput({
         <Picker
           selectedValue={selectedValue}
           onValueChange={onValueChange}
-          dropdownIconColor="#acaaaa"
+          dropdownIconColor="#1B2735"
         >
           <Picker.Item
             label="Escolha o tipo de vacina"

@@ -1,10 +1,18 @@
 import React, { useCallback } from 'react';
-import { vaccinesArray } from './mock';
+import { format } from 'date-fns';
 
 import * as Sty from './styles';
+import { VaccinatedCitizens } from '~/shared/dtos/VaccinatedCitizens';
 
-export function FlatList() {
+type FlatListProps = {
+  vaccinesArray: VaccinatedCitizens[];
+  loading: boolean;
+};
+
+export function FlatList({ vaccinesArray, loading }: FlatListProps) {
   const renderItem = useCallback(({ item }) => {
+    const dateFormated = format(new Date(item.birthDate), 'dd/LL/y');
+
     return (
       <Sty.ContainerItem>
         <Sty.ContainerInfoCitizen>
@@ -12,7 +20,7 @@ export function FlatList() {
 
           <Sty.InformationCitizenCPF>CPF: {item.cpf}</Sty.InformationCitizenCPF>
           <Sty.InformationCitizenBirthday>
-            Data de nascimento: {item.birthDay}
+            Data de nascimento: {dateFormated}
           </Sty.InformationCitizenBirthday>
         </Sty.ContainerInfoCitizen>
 
@@ -20,7 +28,7 @@ export function FlatList() {
           <Sty.VacinneImage />
 
           <Sty.InformationCitizenDose>
-            Dose {item.dose}
+            Dose {item.vaccineDose}
           </Sty.InformationCitizenDose>
         </Sty.ContainerVacinne>
       </Sty.ContainerItem>
@@ -29,14 +37,18 @@ export function FlatList() {
 
   return (
     <Sty.Container>
-      <Sty.FlatList
-        data={vaccinesArray}
-        extraData={vaccinesArray}
-        keyExtractor={(_, index) => index.toString()}
-        renderItem={renderItem}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 20 }}
-      />
+      {loading ? (
+        <Sty.ActivityIndicatorLoading />
+      ) : (
+        <Sty.FlatList
+          data={vaccinesArray}
+          extraData={vaccinesArray}
+          keyExtractor={(_, index) => index.toString()}
+          renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 20 }}
+        />
+      )}
     </Sty.Container>
   );
 }

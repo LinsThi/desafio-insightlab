@@ -11,7 +11,7 @@ export const ContainerPicker = styled.View`
 `;
 
 export const LabelInput = styled.Text`
-  margin-bottom: 10px;
+  margin: 15px 0px 5px 7px;
   font-size: 17px;
   font-weight: bold;
 `;

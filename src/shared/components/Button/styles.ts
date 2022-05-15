@@ -21,4 +21,5 @@ export const Container = styled(TouchableOpacity)<ContainerProps>`
 
 export const NameButton = styled.Text<NameButtonProps>`
   color: ${({ colorText }) => colorText};
+  font-weight: bold;
 `;

@@ -1,14 +1,20 @@
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+
+import Toast from 'react-native-toast-message';
 
 import loginImage from '~/shared/assets/loginImage.png';
 import { Button } from '~/shared/components/Button';
 import { ControlledInput } from '~/shared/components/ControlledInput';
 
+import { REGISTER_API } from '~/shared/constants/api';
+
 import * as Sty from './styles';
 import { useNavigation } from '@react-navigation/native';
+import api from '~/shared/services/api';
+import { ToastNotification } from '~/shared/components/ToastNotification';
+import { validationSchema } from './validation';
 
 type FormData = {
   name: string;
@@ -17,26 +23,13 @@ type FormData = {
   password: string;
 };
 
-const schema = yup.object({
-  name: yup.string().required('Nome necessário'),
-  number: yup.string().required('Número necessário'),
-  email: yup
-    .string()
-    .email('Este e-mail não é valido')
-    .required('E-mail necessário'),
-  password: yup
-    .string()
-    .required('Senha necessária')
-    .min(6, 'Minimo 6 digitos'),
-});
-
 export function FormRegister() {
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(validationSchema),
   });
 
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -44,7 +37,27 @@ export function FormRegister() {
   const navigation = useNavigation();
 
   const handleUserSubmit = useCallback((data: FormData) => {
-    navigation.navigate('Login' as never);
+    api
+      .post(REGISTER_API, {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      })
+      .then(() => {
+        ToastNotification({
+          type: 'success',
+          title: 'Sucesso',
+          info: 'Cliente cadastrado',
+          navigate: () => navigation.navigate('Login' as never),
+        });
+      })
+      .catch(error => {
+        ToastNotification({
+          type: 'error',
+          title: 'ERROR',
+          info: error.response.data.message,
+        });
+      });
   }, []);
 
   return (
@@ -53,7 +66,10 @@ export function FormRegister() {
         <Sty.Image source={loginImage} resizeMode="contain" />
       </Sty.ContainerImg>
 
-      <Sty.ContainerForm showsVerticalScrollIndicator={false}>
+      <Sty.ContainerForm
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 25 }}
+      >
         <Sty.ContainerInputs>
           <ControlledInput
             name="name"
@@ -69,6 +85,8 @@ export function FormRegister() {
             error={errors.number}
             label="Número de telefone"
             placeholder="(XX) 00000-0000"
+            keyboardType="numeric"
+            maxLength={12}
           />
 
           <ControlledInput
@@ -80,6 +98,7 @@ export function FormRegister() {
             iconLeftName="info"
             iconLeftType="feather"
             placeholder="meu-email@gmail.com"
+            keyboardType="email-address"
           />
 
           <ControlledInput
@@ -105,6 +124,8 @@ export function FormRegister() {
           />
         </Sty.ContainerButtons>
       </Sty.ContainerForm>
+
+      <Toast />
     </Sty.Container>
   );
 }
