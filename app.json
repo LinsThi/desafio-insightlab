@@ -3,8 +3,20 @@
     "name": "desafio-insightlab",
     "slug": "desafio-insightlab",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#001D3B"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "package": "linsthi.desafio.insightlab",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#5091ab"
+      }
+    }
   }
 }
