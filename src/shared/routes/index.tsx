@@ -10,6 +10,13 @@ import { RegisterScreen } from '~/modules/Register/Views/RegisterScreen';
 import { useSelector } from 'react-redux';
 import { AplciationState } from '../@types/Entity/AplicationState';
 
+import {
+  HOME_SCREEN,
+  LOGIN_SCREEN,
+  REGISTER_SCREEN,
+  REGISTER_CITIZEN_SCREEN,
+} from '~/shared/constants/routes/index';
+
 const Stack = createNativeStackNavigator();
 const StackLogin = createNativeStackNavigator();
 
@@ -26,23 +33,26 @@ export function StackRoutes() {
         <NavigationContainer>
           {isLogged ? (
             <Stack.Navigator
-              initialRouteName="Home"
+              initialRouteName={HOME_SCREEN}
               screenOptions={{ headerShown: false }}
             >
-              <Stack.Screen name="Home" component={HomeScreen} />
-              <Stack.Screen name="Register" component={RegisterScreen} />
+              <Stack.Screen name={HOME_SCREEN} component={HomeScreen} />
 
               <Stack.Screen
-                name="RegisterCitizen"
+                name={REGISTER_CITIZEN_SCREEN}
                 component={RegisterCitizenScreen}
               />
             </Stack.Navigator>
           ) : (
             <StackLogin.Navigator
-              initialRouteName="Login"
+              initialRouteName={HOME_SCREEN}
               screenOptions={{ headerShown: false }}
             >
-              <StackLogin.Screen name="Login" component={LoginScreen} />
+              <StackLogin.Screen name={LOGIN_SCREEN} component={LoginScreen} />
+              <StackLogin.Screen
+                name={REGISTER_SCREEN}
+                component={RegisterScreen}
+              />
             </StackLogin.Navigator>
           )}
         </NavigationContainer>

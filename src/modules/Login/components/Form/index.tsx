@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import loginImage from '~/shared/assets/loginImage.png';
@@ -17,22 +16,13 @@ import { LOGIN } from '~/shared/constants/api';
 import { useDispatch } from 'react-redux';
 import { userLoginAction } from '~/shared/store/ducks/user/actions';
 import { ToastNotification } from '~/shared/components/ToastNotification';
+import { validationSchema } from './validation';
+import { REGISTER_SCREEN } from '~/shared/constants/routes';
 
 type FormData = {
   email: string;
   password: string;
 };
-
-const schema = yup.object({
-  email: yup
-    .string()
-    .email('Este e-mail não é valido')
-    .required('E-mail necessário'),
-  password: yup
-    .string()
-    .required('Senha necessária')
-    .min(6, 'Minimo 6 digitos'),
-});
 
 export function Form() {
   const {
@@ -40,7 +30,7 @@ export function Form() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(validationSchema),
   });
 
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -65,8 +55,6 @@ export function Form() {
           title: 'Ops, ocorreu um erro:',
           info: error.response.data.message,
         });
-
-        console.log(error);
       });
   }, []);
 
@@ -115,7 +103,7 @@ export function Form() {
           text="Cadastrar"
           color="#fff"
           textColor="#1B2735"
-          onPress={() => navigation.navigate('Register' as never)}
+          onPress={() => navigation.navigate(REGISTER_SCREEN as never)}
         />
       </Sty.ContainerButtons>
 

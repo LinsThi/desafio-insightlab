@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Toast from 'react-native-toast-message';
@@ -15,6 +14,7 @@ import * as Sty from './styles';
 import { useNavigation } from '@react-navigation/native';
 import api from '~/shared/services/api';
 import { ToastNotification } from '~/shared/components/ToastNotification';
+import { validationSchema } from './validation';
 
 type FormData = {
   name: string;
@@ -23,26 +23,13 @@ type FormData = {
   password: string;
 };
 
-const schema = yup.object({
-  name: yup.string().required('Nome necessário'),
-  number: yup.string().required('Número necessário'),
-  email: yup
-    .string()
-    .email('Este e-mail não é valido')
-    .required('E-mail necessário'),
-  password: yup
-    .string()
-    .required('Senha necessária')
-    .min(6, 'Minimo 6 digitos'),
-});
-
 export function FormRegister() {
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(validationSchema),
   });
 
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -79,7 +66,10 @@ export function FormRegister() {
         <Sty.Image source={loginImage} resizeMode="contain" />
       </Sty.ContainerImg>
 
-      <Sty.ContainerForm showsVerticalScrollIndicator={false}>
+      <Sty.ContainerForm
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 25 }}
+      >
         <Sty.ContainerInputs>
           <ControlledInput
             name="name"
