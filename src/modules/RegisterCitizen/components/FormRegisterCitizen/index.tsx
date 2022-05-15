@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Toast from 'react-native-toast-message';
 import { Button } from '~/shared/components/Button';
@@ -15,6 +14,7 @@ import { REGISTER_VACCINATED_CITIZENS } from '~/shared/constants/api';
 import { ToastNotification } from '~/shared/components/ToastNotification';
 import { AplciationState } from '~/shared/@types/Entity/AplicationState';
 import { useSelector } from 'react-redux';
+import { validationSchema } from './validation';
 
 type FormData = {
   name: string;
@@ -24,27 +24,13 @@ type FormData = {
   dose: string;
 };
 
-const schema = yup.object({
-  name: yup.string().required('Nome obrigatório'),
-  cpf: yup.string().required('CPF obrigatório').min(14, 'CPF Inválido'),
-  birthDay: yup
-    .string()
-    .required('Data de aniversário necessário')
-    .min(8, 'Data Inválida'),
-  vacinne: yup.string().required('Vacina obrigatória'),
-  dose: yup
-    .string()
-    .required('Dose necessária')
-    .oneOf(['1', '2'], 'Dose errada'),
-});
-
 export function FormRegisterCitizen() {
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(validationSchema),
   });
 
   const navigation = useNavigation();
