@@ -61,4 +61,5 @@ export const ActivityIndicatorLoading = styled.ActivityIndicator.attrs({
 
 export const FlatList = styled.FlatList`
   width: 90%;
+  margin-top: 10px;
 `;
