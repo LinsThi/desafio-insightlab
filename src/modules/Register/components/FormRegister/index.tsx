@@ -66,7 +66,10 @@ export function FormRegister() {
         <Sty.Image source={loginImage} resizeMode="contain" />
       </Sty.ContainerImg>
 
-      <Sty.ContainerForm showsVerticalScrollIndicator={false}>
+      <Sty.ContainerForm
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 25 }}
+      >
         <Sty.ContainerInputs>
           <ControlledInput
             name="name"
