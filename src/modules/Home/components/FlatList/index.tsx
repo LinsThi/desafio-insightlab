@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
-import { ActivityIndicator } from 'react-native';
 import { format } from 'date-fns';
 
 import * as Sty from './styles';
+import { VaccinatedCitizens } from '~/shared/dtos/VaccinatedCitizens';
 
 type FlatListProps = {
-  vaccinesArray: [];
+  vaccinesArray: VaccinatedCitizens[];
   loading: boolean;
 };
 
@@ -38,7 +38,7 @@ export function FlatList({ vaccinesArray, loading }: FlatListProps) {
   return (
     <Sty.Container>
       {loading ? (
-        <ActivityIndicator color="#dffe3a" size="large" />
+        <Sty.ActivityIndicatorLoading />
       ) : (
         <Sty.FlatList
           data={vaccinesArray}
