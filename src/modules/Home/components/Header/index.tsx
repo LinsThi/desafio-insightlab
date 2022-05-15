@@ -1,7 +1,6 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import * as Sty from './styles';
-import { Popable } from 'react-native-popable';
 import { useDispatch, useSelector } from 'react-redux';
 import { AplciationState } from '~/shared/@types/Entity/AplicationState';
 import { userLoggoutAction } from '~/shared/store/ducks/user/actions';
