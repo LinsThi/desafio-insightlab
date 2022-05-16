@@ -33,10 +33,13 @@ export function FormRegister() {
   });
 
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
 
   const handleUserSubmit = useCallback((data: FormData) => {
+    setLoading(true);
+
     api
       .post(REGISTER_API, {
         name: data.name,
@@ -57,6 +60,9 @@ export function FormRegister() {
           title: 'ERROR',
           info: error.response.data.message,
         });
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -121,6 +127,7 @@ export function FormRegister() {
             textColor="#FFFFFF"
             onPress={handleSubmit(handleUserSubmit)}
             style={{ marginTop: 0 }}
+            loading={loading}
           />
         </Sty.ContainerButtons>
       </Sty.ContainerForm>

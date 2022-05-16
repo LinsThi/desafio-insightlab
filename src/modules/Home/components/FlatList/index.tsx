@@ -46,7 +46,7 @@ export function FlatList({ vaccinesArray, loading }: FlatListProps) {
           keyExtractor={(_, index) => index.toString()}
           renderItem={renderItem}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 20 }}
+          contentContainerStyle={{ paddingBottom: 100 }}
         />
       )}
     </Sty.Container>

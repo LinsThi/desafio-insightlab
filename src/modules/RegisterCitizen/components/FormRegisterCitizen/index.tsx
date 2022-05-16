@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Toast from 'react-native-toast-message';
@@ -15,6 +15,7 @@ import { ToastNotification } from '~/shared/components/ToastNotification';
 import { AplciationState } from '~/shared/@types/Entity/AplicationState';
 import { useSelector } from 'react-redux';
 import { validationSchema } from './validation';
+import { HOME_SCREEN } from '~/shared/constants/routes';
 
 type FormData = {
   name: string;
@@ -33,10 +34,12 @@ export function FormRegisterCitizen() {
     resolver: yupResolver(validationSchema),
   });
 
+  const [laoding, setLoading] = useState(false);
   const navigation = useNavigation();
   const { token } = useSelector((state: AplciationState) => state.user);
 
   const handleUserSubmit = useCallback((data: FormData) => {
+    setLoading(true);
     api
       .post(
         REGISTER_VACCINATED_CITIZENS,
@@ -56,8 +59,11 @@ export function FormRegisterCitizen() {
           type: 'success',
           title: 'Sucesso',
           info: 'Cidadão vacinado cadastrado',
-          navigate: () => navigation.navigate('Home' as never),
+          navigate: () => navigation.navigate(HOME_SCREEN as never),
         });
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -120,6 +126,7 @@ export function FormRegisterCitizen() {
             textColor="#FFFFFF"
             onPress={handleSubmit(handleUserSubmit)}
             style={{ marginTop: 0 }}
+            loading={laoding}
           />
         </Sty.ContainerButtons>
       </Sty.ContainerForm>

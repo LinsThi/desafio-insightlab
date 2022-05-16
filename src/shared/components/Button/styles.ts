@@ -23,3 +23,7 @@ export const NameButton = styled.Text<NameButtonProps>`
   color: ${({ colorText }) => colorText};
   font-weight: bold;
 `;
+
+export const LoadingIndicator = styled.ActivityIndicator.attrs({
+  size: 'large',
+})``;
