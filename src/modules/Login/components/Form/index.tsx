@@ -10,14 +10,13 @@ import Toast from 'react-native-toast-message';
 
 import * as Sty from './styles';
 import { useNavigation } from '@react-navigation/native';
-import api from '~/shared/services/api';
 
-import { LOGIN } from '~/shared/constants/api';
 import { useDispatch } from 'react-redux';
 import { userLoginAction } from '~/shared/store/ducks/user/actions';
-import { ToastNotification } from '~/shared/components/ToastNotification';
 import { validationSchema } from './validation';
 import { REGISTER_SCREEN } from '~/shared/constants/routes';
+import { loginUser } from '~/shared/services/user';
+import { useTheme } from 'styled-components/native';
 
 type FormData = {
   email: string;
@@ -38,29 +37,24 @@ export function Form() {
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const theme = useTheme();
 
-  const handleUserSubmit = useCallback((data: FormData) => {
+  const handleUserSubmit = useCallback(async (data: FormData) => {
     setLoading(true);
-    api
-      .post(LOGIN, {
-        email: data.email,
-        password: data.password,
-      })
-      .then(response => {
-        const { user, token } = response.data;
 
-        dispatch(userLoginAction(user.name, token));
-      })
-      .catch(error => {
-        ToastNotification({
-          type: 'error',
-          title: 'Ops, ocorreu um erro:',
-          info: error.response.data.message,
-        });
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    const { email, password } = data;
+
+    const response = await loginUser({
+      email,
+      password,
+    });
+
+    setLoading(false);
+
+    if (Object.keys(response).length > 0) {
+      const { user, token } = response;
+      dispatch(userLoginAction(user.name, token));
+    }
   }, []);
 
   return (
@@ -99,16 +93,16 @@ export function Form() {
       <Sty.ContainerButtons>
         <Button
           text="Entrar"
-          color="#1B2735"
-          textColor="#FFFFFF"
+          color={theme.Colors.PRIMARY_BUTTON}
+          textColor={theme.Colors.SECONDARY_BUTTON}
           onPress={handleSubmit(handleUserSubmit)}
           loading={loading}
         />
 
         <Button
           text="Cadastrar"
-          color="#fff"
-          textColor="#1B2735"
+          color={theme.Colors.SECONDARY_BUTTON}
+          textColor={theme.Colors.PRIMARY_BUTTON}
           onPress={() => navigation.navigate(REGISTER_SCREEN as never)}
         />
       </Sty.ContainerButtons>

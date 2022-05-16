@@ -3,6 +3,7 @@ import { Picker, PickerProps } from '@react-native-picker/picker';
 
 import * as Sty from './styles';
 import { vaccinesName } from './mock';
+import { useTheme } from 'styled-components/native';
 
 export type PickerInputProps = PickerProps & {
   label: string;
@@ -13,6 +14,8 @@ export function PickerInput({
   selectedValue,
   onValueChange,
 }: PickerInputProps) {
+  const theme = useTheme();
+
   return (
     <Sty.Container>
       <Sty.LabelInput>{label}</Sty.LabelInput>
@@ -21,13 +24,13 @@ export function PickerInput({
         <Picker
           selectedValue={selectedValue}
           onValueChange={onValueChange}
-          dropdownIconColor="#1B2735"
+          dropdownIconColor={theme.Colors.DROPDOWN_PICKER_ICON}
         >
           <Picker.Item
             label="Escolha o tipo de vacina"
             value="0"
             enabled={false}
-            color="#acaaaa"
+            color={theme.Colors.ITEM_PICKER_DISABLED}
           />
 
           {vaccinesName.map(vacine => {
@@ -37,8 +40,8 @@ export function PickerInput({
                 value={vacine.value}
                 key={vacine.id}
                 style={{
-                  backgroundColor: '#fff',
-                  color: '#000',
+                  backgroundColor: theme.Colors.BACKGROUND_PICKER_INPUT,
+                  color: theme.Colors.ITEM_PICKER,
                 }}
               />
             );

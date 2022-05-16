@@ -16,6 +16,7 @@ import { AplciationState } from '~/shared/@types/Entity/AplicationState';
 import { useSelector } from 'react-redux';
 import { validationSchema } from './validation';
 import { HOME_SCREEN } from '~/shared/constants/routes';
+import { useTheme } from 'styled-components/native';
 
 type FormData = {
   name: string;
@@ -36,6 +37,7 @@ export function FormRegisterCitizen() {
 
   const [laoding, setLoading] = useState(false);
   const navigation = useNavigation();
+  const theme = useTheme();
   const { token } = useSelector((state: AplciationState) => state.user);
 
   const handleUserSubmit = useCallback((data: FormData) => {
@@ -122,8 +124,8 @@ export function FormRegisterCitizen() {
         <Sty.ContainerButtons>
           <Button
             text="Cadastrar Cidadão"
-            color="#1B2735"
-            textColor="#FFFFFF"
+            color={theme.Colors.PRIMARY_BUTTON}
+            textColor={theme.Colors.SECONDARY_BUTTON}
             onPress={handleSubmit(handleUserSubmit)}
             style={{ marginTop: 0 }}
             loading={laoding}
