@@ -18,6 +18,7 @@ import {
 } from '~/shared/constants/routes/index';
 import { ThemeProvider } from 'styled-components/native';
 import theme from '../theme';
+import { StatusBar } from 'expo-status-bar';
 
 const Stack = createNativeStackNavigator();
 const StackLogin = createNativeStackNavigator();
@@ -33,6 +34,7 @@ export function StackRoutes() {
     >
       <SafeAreaView style={{ flex: 1 }}>
         <ThemeProvider theme={theme}>
+          <StatusBar />
           <NavigationContainer>
             {isLogged ? (
               <Stack.Navigator

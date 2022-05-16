@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AplciationState } from '~/shared/@types/Entity/AplicationState';
 import { userLoggoutAction } from '~/shared/store/ducks/user/actions';
 import MenuFilter from '../MenuFilter';
-import { Popable } from 'react-native-popable';
 
 export function Header() {
   const { name } = useSelector((state: AplciationState) => state.user);
+  const { filterArray } = useSelector(
+    (state: AplciationState) => state.citizensVacinned,
+  );
   const [visible, setVisible] = useState(false);
 
   const dispatch = useDispatch();
@@ -30,7 +32,11 @@ export function Header() {
               </Sty.ContainerPopable>
             }
           >
-            <MenuFilter visible={visible} setVisible={setVisible} />
+            <MenuFilter
+              visible={visible}
+              setVisible={setVisible}
+              selectedItem={filterArray}
+            />
           </Sty.PopableView>
         </Sty.ButtonFilter>
 
