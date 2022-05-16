@@ -24,6 +24,4 @@ export const NameButton = styled.Text<NameButtonProps>`
   font-weight: bold;
 `;
 
-export const LoadingIndicator = styled.ActivityIndicator.attrs({
-  size: 'large',
-})``;
+export const LoadingIndicator = styled.ActivityIndicator``;
