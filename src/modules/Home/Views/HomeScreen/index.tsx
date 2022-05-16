@@ -12,12 +12,14 @@ import { AplciationState } from '~/shared/@types/Entity/AplicationState';
 import { VaccinatedCitizens } from '~/shared/dtos/VaccinatedCitizens';
 import { filterArrayVacinne } from '../../utils';
 import { setCitizensVacinnedAction } from '~/shared/store/ducks/citizensVacinned/actions';
+import { useNavigation } from '@react-navigation/native';
 
 export function HomeScreen() {
   const [arrayFiltred, setArrayFiltred] = useState<VaccinatedCitizens[]>([]);
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const { token } = useSelector((state: AplciationState) => state.user);
   const { filterArray, vaccinesArray } = useSelector(
@@ -25,19 +27,23 @@ export function HomeScreen() {
   );
 
   useEffect(() => {
-    setLoading(true);
+    const refreshVaccinesArray = navigation.addListener('focus', () => {
+      setLoading(true);
 
-    api
-      .get(GET_VACCINATED_CITIZENS, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(response => {
-        dispatch(setCitizensVacinnedAction(response.data));
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+      api
+        .get(GET_VACCINATED_CITIZENS, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then(response => {
+          dispatch(setCitizensVacinnedAction(response.data));
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    });
+
+    return refreshVaccinesArray;
+  }, [navigation]);
 
   useEffect(() => {
     if (filterArray) {
