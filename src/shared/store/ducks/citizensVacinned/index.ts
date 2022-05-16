@@ -1,4 +1,5 @@
 import type { Reducer } from 'redux';
+import { UserTypes } from '../user/types';
 import { CitizensVacinnedState, CitizensVacinnedTypes } from './types';
 
 const INITIAL_STATE: CitizensVacinnedState = {
@@ -25,6 +26,8 @@ const reducer: Reducer<CitizensVacinnedState> = (
         ...state,
         filterArray: payload.filter,
       };
+    case UserTypes.USER_LOGGOUT:
+      return INITIAL_STATE;
     default:
       return state;
   }
