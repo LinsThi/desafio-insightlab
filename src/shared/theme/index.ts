@@ -1,0 +1,28 @@
+export default {
+  Colors: {
+    BLACK: '#000',
+    WHITE: '#FFF',
+
+    ACTIVITY_INDICATOR: '#dffe3a',
+    NAME_CITIZEN: '#1b2735',
+    FLOAT_BUTTON_BACKGROUND: '#4add95',
+    FLOAT_BUTTON_COLOR: '#FFF',
+    PRIMARY_BUTTON: '#1b2735',
+    SECONDARY_BUTTON: '#FFF',
+
+    TEXT_ERROR: '#db1617',
+
+    ICON_INPUT_COLOR: '#1b2735',
+    ICON_HEADER_COLOR: '#FFF',
+    BACKGROUND_INPUT: '#FFF',
+    BACKGROUND_PICKER_INPUT: '#FFF',
+    ITEM_PICKER: '#000',
+    ITEM_PICKER_DISABLED: '#acaaaa',
+    DROPDOWN_PICKER_ICON: '#1b2735',
+  },
+
+  Sizes: {
+    ICON_BUTTON: 25,
+    ICON_HEADER_BUTTON: 30,
+  },
+};

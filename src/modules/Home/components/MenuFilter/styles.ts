@@ -6,9 +6,11 @@ type IconProps = {
   type?: string;
 };
 
-export const IconMenu = styled(Icon).attrs<IconProps>(({ name, type }) => ({
-  name,
-  type,
-  size: 30,
-  color: '#fff',
-}))``;
+export const IconMenu = styled(Icon).attrs<IconProps>(
+  ({ name, type, theme }) => ({
+    name,
+    type,
+    size: theme.Sizes.ICON_HEADER_BUTTON,
+    color: theme.Colors.ICON_HEADER_COLOR,
+  }),
+)``;

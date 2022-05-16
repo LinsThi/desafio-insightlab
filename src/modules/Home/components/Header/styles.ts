@@ -31,12 +31,12 @@ export const ContainerPopable = styled.TouchableOpacity`
 `;
 
 export const TextPopable = styled.Text`
-  color: #fff;
+  color: ${({ theme }) => theme.Colors.WHITE};
 `;
 
 export const TextUser = styled.Text`
   font-size: 20px;
-  color: #fff;
+  color: ${({ theme }) => theme.Colors.WHITE};
 
   margin-left: 10px;
   font-weight: bold;
@@ -53,9 +53,11 @@ export const PopableView = styled(Popable).attrs({ position: 'bottom' })`
   width: 50px;
 `;
 
-export const IconHeader = styled(Icon).attrs<IconProps>(({ name, type }) => ({
-  name,
-  type,
-  size: 30,
-  color: '#fff',
-}))``;
+export const IconHeader = styled(Icon).attrs<IconProps>(
+  ({ name, type, theme }) => ({
+    name,
+    type,
+    size: theme.Sizes.ICON_HEADER_BUTTON,
+    color: theme.Colors.ICON_HEADER_COLOR,
+  }),
+)``;

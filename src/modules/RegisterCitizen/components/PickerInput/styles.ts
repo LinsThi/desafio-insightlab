@@ -5,7 +5,7 @@ export const Container = styled.View`
 `;
 
 export const ContainerPicker = styled.View`
-  background: #fff;
+  background: ${({ theme }) => theme.Colors.BACKGROUND_PICKER_INPUT};
   border-radius: 20px;
   padding-left: 5px;
 `;

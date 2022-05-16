@@ -8,13 +8,13 @@ import loginImage from '~/shared/assets/loginImage.png';
 import { Button } from '~/shared/components/Button';
 import { ControlledInput } from '~/shared/components/ControlledInput';
 
-import { REGISTER_API } from '~/shared/constants/api';
-
 import * as Sty from './styles';
 import { useNavigation } from '@react-navigation/native';
-import api from '~/shared/services/api';
 import { ToastNotification } from '~/shared/components/ToastNotification';
 import { validationSchema } from './validation';
+import { LOGIN_SCREEN } from '~/shared/constants/routes';
+import { registerUser } from '~/shared/services/user';
+import { useTheme } from 'styled-components/native';
 
 type FormData = {
   name: string;
@@ -36,22 +36,20 @@ export function FormRegister() {
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
+  const theme = useTheme();
 
-  const handleUserSubmit = useCallback((data: FormData) => {
+  const handleUserSubmit = useCallback(async (data: FormData) => {
     setLoading(true);
 
-    api
-      .post(REGISTER_API, {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-      })
+    const { name, email, password } = data;
+
+    await registerUser({ name, email, password })
       .then(() => {
         ToastNotification({
           type: 'success',
           title: 'Sucesso',
           info: 'Cliente cadastrado',
-          navigate: () => navigation.navigate('Login' as never),
+          navigate: () => navigation.navigate(LOGIN_SCREEN as never),
         });
       })
       .catch(error => {
@@ -123,8 +121,8 @@ export function FormRegister() {
         <Sty.ContainerButtons>
           <Button
             text="Concluir"
-            color="#1B2735"
-            textColor="#FFFFFF"
+            color={theme.Colors.PRIMARY_BUTTON}
+            textColor={theme.Colors.SECONDARY_BUTTON}
             onPress={handleSubmit(handleUserSubmit)}
             style={{ marginTop: 0 }}
             loading={loading}

@@ -9,7 +9,7 @@ type IconProps = {
 export const Container = styled.TouchableOpacity`
   width: 60px;
   height: 60px;
-  background-color: #4add95;
+  background-color: ${({ theme }) => theme.Colors.FLOAT_BUTTON_BACKGROUND};
   border-radius: 50px;
   align-items: center;
   justify-content: center;
@@ -18,9 +18,11 @@ export const Container = styled.TouchableOpacity`
   right: 30px;
 `;
 
-export const IconButton = styled(Icon).attrs<IconProps>(({ name, type }) => ({
-  name,
-  type,
-  size: 25,
-  color: '#fff',
-}))``;
+export const IconButton = styled(Icon).attrs<IconProps>(
+  ({ name, type, theme }) => ({
+    name,
+    type,
+    size: 25,
+    color: theme.Colors.WHITE,
+  }),
+)``;

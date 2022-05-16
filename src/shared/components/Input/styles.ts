@@ -16,7 +16,7 @@ export const Container = styled.View`
 `;
 
 export const ContainerInput = styled.View<ContainerInputProps>`
-  background: #fff;
+  background: ${({ theme }) => theme.Colors.BACKGROUND_INPUT};
   flex-direction: row;
   align-items: center;
   border-radius: 20px;
@@ -29,12 +29,14 @@ export const Input = styled(TextInput)`
   margin: 0px 5px;
 `;
 
-export const IconInput = styled(Icon).attrs<IconProps>(({ name, type }) => ({
-  name,
-  type,
-  size: 25,
-  color: '#1B2735',
-}))<IconProps>``;
+export const IconInput = styled(Icon).attrs<IconProps>(
+  ({ name, type, theme }) => ({
+    name,
+    type,
+    size: 25,
+    color: theme.Colors.ICON_INPUT_COLOR,
+  }),
+)<IconProps>``;
 
 export const ButtonIcon = styled.TouchableOpacity``;
 
