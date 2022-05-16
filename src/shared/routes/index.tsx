@@ -16,6 +16,8 @@ import {
   REGISTER_SCREEN,
   REGISTER_CITIZEN_SCREEN,
 } from '~/shared/constants/routes/index';
+import { ThemeProvider } from 'styled-components/native';
+import theme from '../theme';
 
 const Stack = createNativeStackNavigator();
 const StackLogin = createNativeStackNavigator();
@@ -30,32 +32,37 @@ export function StackRoutes() {
       enabled={false}
     >
       <SafeAreaView style={{ flex: 1 }}>
-        <NavigationContainer>
-          {isLogged ? (
-            <Stack.Navigator
-              initialRouteName={HOME_SCREEN}
-              screenOptions={{ headerShown: false }}
-            >
-              <Stack.Screen name={HOME_SCREEN} component={HomeScreen} />
+        <ThemeProvider theme={theme}>
+          <NavigationContainer>
+            {isLogged ? (
+              <Stack.Navigator
+                initialRouteName={HOME_SCREEN}
+                screenOptions={{ headerShown: false }}
+              >
+                <Stack.Screen name={HOME_SCREEN} component={HomeScreen} />
 
-              <Stack.Screen
-                name={REGISTER_CITIZEN_SCREEN}
-                component={RegisterCitizenScreen}
-              />
-            </Stack.Navigator>
-          ) : (
-            <StackLogin.Navigator
-              initialRouteName={HOME_SCREEN}
-              screenOptions={{ headerShown: false }}
-            >
-              <StackLogin.Screen name={LOGIN_SCREEN} component={LoginScreen} />
-              <StackLogin.Screen
-                name={REGISTER_SCREEN}
-                component={RegisterScreen}
-              />
-            </StackLogin.Navigator>
-          )}
-        </NavigationContainer>
+                <Stack.Screen
+                  name={REGISTER_CITIZEN_SCREEN}
+                  component={RegisterCitizenScreen}
+                />
+              </Stack.Navigator>
+            ) : (
+              <StackLogin.Navigator
+                initialRouteName={HOME_SCREEN}
+                screenOptions={{ headerShown: false }}
+              >
+                <StackLogin.Screen
+                  name={LOGIN_SCREEN}
+                  component={LoginScreen}
+                />
+                <StackLogin.Screen
+                  name={REGISTER_SCREEN}
+                  component={RegisterScreen}
+                />
+              </StackLogin.Navigator>
+            )}
+          </NavigationContainer>
+        </ThemeProvider>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
