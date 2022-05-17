@@ -20,7 +20,9 @@ export function Header() {
       <Sty.ContainerUser>
         <Sty.IconHeader name="user-circle-o" type="font" />
 
-        <Sty.TextUser>Bem-vindo, {name}!</Sty.TextUser>
+        <Sty.TextUser numberOfLines={2}>
+          Bem-vindo, {name.split(' ')[0]}!
+        </Sty.TextUser>
       </Sty.ContainerUser>
 
       <Sty.ContainerButtons>

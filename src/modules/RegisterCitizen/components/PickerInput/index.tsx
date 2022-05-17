@@ -39,10 +39,6 @@ export function PickerInput({
                 label={vacine.label}
                 value={vacine.value}
                 key={vacine.id}
-                style={{
-                  backgroundColor: theme.Colors.BACKGROUND_PICKER_INPUT,
-                  color: theme.Colors.ITEM_PICKER,
-                }}
               />
             );
           })}
