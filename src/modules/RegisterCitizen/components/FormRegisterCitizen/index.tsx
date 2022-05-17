@@ -98,8 +98,8 @@ export function FormRegisterCitizen() {
             error={errors.birthDay}
             label="Data de Nascimento"
             keyboardType="numeric"
-            placeholder="00/00/00"
-            maxLength={8}
+            placeholder="00/00/0000"
+            maxLength={10}
             mask="birthDay"
           />
 
