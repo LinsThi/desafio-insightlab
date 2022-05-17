@@ -8,7 +8,7 @@ import { verifyMask } from './utils';
 type ControlledProps = InputProps & {
   control: Control<any>;
   name: string;
-  mask?: 'CPF' | 'birthDay' | '';
+  mask?: 'CPF' | 'birthDay' | 'phone' | '';
   error?: FieldError;
 };
 

@@ -90,7 +90,8 @@ export function FormRegister() {
             label="Número de telefone"
             placeholder="(XX) 00000-0000"
             keyboardType="numeric"
-            maxLength={12}
+            maxLength={15}
+            mask="phone"
           />
 
           <ControlledInput
