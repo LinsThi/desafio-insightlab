@@ -21,7 +21,7 @@ import { useTheme } from 'styled-components/native';
 type FormData = {
   name: string;
   cpf: string;
-  birthDay: Date;
+  birthDay: string;
   vacinne: VaccinesProps;
   dose: string;
 };
@@ -42,13 +42,17 @@ export function FormRegisterCitizen() {
 
   const handleUserSubmit = useCallback((data: FormData) => {
     setLoading(true);
+    const [day, month, year] = data.birthDay.split('/');
+
+    const dateFormated = new Date(Number(year), Number(month), Number(day));
+
     api
       .post(
         REGISTER_VACCINATED_CITIZENS,
         {
           name: data.name,
           cpf: data.cpf,
-          birthDate: new Date(data.birthDay),
+          birthDate: dateFormated,
           vaccineName: data.vacinne,
           vaccineDose: data.dose,
         },
