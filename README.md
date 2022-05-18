@@ -24,15 +24,15 @@
   </summary>
   <ol>
     <li>
-      <a href="#sobre-o-projeto">Sobre o projeto</a>
+      <a href="#-sobre-o-projeto">Sobre o projeto</a>
       <ul>
-        <li><a href="#pontos-principais">Pontos principais</a></li>
+        <li><a href="#-pontos-principais">Pontos principais</a></li>
       </ul>
       <ul>
-        <li><a href="#framework">Framework</a></li>
+        <li><a href="#-framework">Framework</a></li>
       </ul>
     </li>
-    <li><a href="#instalação">Instalação</a></li>
+    <li><a href="#-instalação">Instalação</a></li>
   </ol>
 </details>
 
